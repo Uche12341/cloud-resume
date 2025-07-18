@@ -50,9 +50,11 @@ jobs:
 
       - name: Sync to S3
         run: |
-          aws s3 sync . uchenna-okoronkwo-resume.com \
-            --exclude ".git/*" --exclude "cloud-resume-terraform/*" \
-            --delete
+          aws s3 sync ./ s3://uchenna-okoronkwo-resume.com \
+            --exclude ".git/*" \
+	    --exclude "cloud-resume-terraform/*" \
+            --delete \
+	    --acl public-read
 
       - name: Invalidate CloudFront cache
         run: |
