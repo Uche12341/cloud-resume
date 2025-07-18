@@ -205,3 +205,12 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Terraform state & plugins
+.terraform/
+*.tfstate
+.terraform.lock.hcl
+
+# Build artifacts
+*.zip
+
