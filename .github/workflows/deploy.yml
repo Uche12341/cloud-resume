@@ -1,0 +1,62 @@
+name: Deploy Cloud Resume
+
+# trigger on pushes to main
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  # 1) Terraform: apply your backend infra
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-region: us-east-1
+          aws-access-key-id:   ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: "1.5.0"
+
+      - name: Terraform Init & Apply
+        working-directory: cloud-resume-terraform   
+        run: |
+          terraform init
+          terraform apply -auto-approve
+
+  # 2) S3 & CloudFront: deploy your static site
+  deploy-site:
+    needs: terraform
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-region: us-east-1
+          aws-access-key-id:   ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Sync to S3
+        run: |
+          aws s3 sync . uchenna-okoronkwo-resume.com \
+            --exclude ".git/*" --exclude "cloud-resume-terraform/*" \
+            --delete
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DIST_ID }} \
+            --paths "/*"
+
