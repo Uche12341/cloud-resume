@@ -52,9 +52,9 @@ jobs:
         run: |
           aws s3 sync ./ s3://uchenna-okoronkwo-resume.com \
             --exclude ".git/*" \
-	    --exclude "cloud-resume-terraform/*" \
+            --exclude "cloud-resume-terraform/*" \
             --delete \
-	    --acl public-read
+            --acl public-read
 
       - name: Invalidate CloudFront cache
         run: |
