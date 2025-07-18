@@ -59,3 +59,14 @@ jobs:
           aws cloudfront create-invalidation \
             --distribution-id ${{ secrets.CLOUDFRONT_DIST_ID }} \
             --paths "/*"
+
+      - name: Smoke-test endpoint
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://uchennaokoronkwo.com/)
+          if [ "$STATUS" -ne 200 ]; then
+            echo "Smoke-test failed: HTTP $STATUS"
+            exit 1
+          else
+            echo "Smoke-test passed"
+          fi
+
