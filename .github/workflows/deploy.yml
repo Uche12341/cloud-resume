@@ -51,7 +51,8 @@ jobs:
       - name: Sync to S3
         run: |
           aws s3 sync HTML/ s3://uchenna-okoronkwo-resume.com \
-            --delete \
+            --exclude ".DS_Store" \           
+            --delete
 
       - name: Invalidate CloudFront cache
         run: |
