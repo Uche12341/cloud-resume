@@ -213,4 +213,4 @@ __marimo__/
 
 # Build artifacts
 *.zip
-
+!lambda.zip
