@@ -27,7 +27,7 @@ jobs:
           terraform_version: "1.5.0"
 
       - name: Terraform Init & Apply
-        working-directory: cloud-resume-terraform   
+        working-directory: .   
         run: |
           terraform init
           terraform apply -auto-approve
