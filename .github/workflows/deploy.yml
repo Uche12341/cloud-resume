@@ -54,7 +54,6 @@ jobs:
             --exclude ".git/*" \
             --exclude "cloud-resume-terraform/*" \
             --delete \
-            --acl public-read
 
       - name: Invalidate CloudFront cache
         run: |
