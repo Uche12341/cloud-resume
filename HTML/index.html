@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UCHENNA OKORONKWO - Resume</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <img src="headshot.jpg" alt="UCHENNA OKORONKWO Headshot" class="headshot" />
+    <h1>UCHENNA OKORONKWO</h1>
+    <p class="contact-info">
+      Houston, TX, United States<br>
+      Phone: (469) 420-8941<br>
+      Email: <a href="mailto:uche12341@gmail.com">uche12341@gmail.com</a><br>
+      LinkedIn: <a href="https://www.linkedin.com/in/uchenna-okoronkwo-183b87281" target="_blank" class="linkedin-link">linkedin.com/in/uchenna-okoronkwo-183b87281</a>
+    </p>
+  </header>
+
+  <section id="employment">
+    <h2>Employment History</h2>
+    <div class="job">
+        <h3>Information Desk Student Assistant - M.D. Anderson Library</h3>
+        <p><em>University of Houston · Part-time</em></p>
+        <p><em>Jan 2025 - Present </em></p>
+        <p><em>Houston, Texas, United States · On-site</em></p>
+        <ul>
+          <li>Served as the first point of contact for students, faculty, and visitors, providing exceptional customer service both in person and over the phone.</li>
+          <li>Supported circulation desk operations, including checking materials in and out, managing reservations, and handling overdue items.</li>
+          <li>Worked closely with library staff to uphold policies, ensure smooth daily operations, and improve overall service efficiency.</li>
+        </ul>
+      </div>
+      
+      <div class="job">
+        <h3>Warehouse Associate</h3>
+        <p><em>Amazon Fulfillment Center and Service Provider · Full-time</em></p>
+        <p><em>May 2023 - Aug 2023 · 4 mos</em></p>
+        <p><em>Forney, Texas, United States · On-site</em></p>
+        <ul>
+          <li>Operated automated packaging machinery and scanning devices to track inventory</li>
+          <li>Packed and prepared 2,000+ orders weekly, contributing to timely deliveries throughout the season</li>
+          <li>Collaborated with other associates to ensure seamless order fulfilment and reduce order oversights</li>
+        </ul>
+      </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="education-item">
+        <h3><strong>University of Houston</strong></h3>
+        <p><em>Aug 2023 - Expected: May 2027 | Houston, TX  </em></p>
+        <p>Bachelor of Science in Computer Science</p>
+    </div>
+      
+    <div class="education-item">
+      <h3><strong>Dallas College</strong></h3>
+      <p><em>Jun 2023 - Aug 2023 | Dallas, TX  </em></p>
+      <p>Summer Transferable Courses</p>
+    </div>
+
+    <div class="education-item">
+      <h3><strong>Trinity Valley Community College</strong></h3>
+      <p><em>Aug 2021 - May 2023 | Athens, TX</em></p>
+      <p>Dual Enrollment, Transferable Courses</p>
+    </div>
+  </section>
+
+  <section id="involvement">
+    <h2>Other Involvement</h2>
+    <div class="education-item">
+        <h3>National Society of Black Engineers (NSBE)</h3>
+        <p><em>- University of Houston (NSBE)</em></p>
+        <p>Active member participating in volunteering events, workshops, and networking events, etc.</p>
+      </div>
+  </section>
+
+  <section id="skills">
+    <h2>Technical Skills</h2>
+    <ul>
+      <li>Languages: Python, C/C++, HTML/CSS</li>
+      <li>Developer Tools: VS Code, Visual Studio, PyCharm</li>
+    </ul>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project">
+       <h3>AWS Cloud-Hosted Resume</h3>
+       <ul>
+        <li>Built a personal resume website from scratch using HTML and CSS for structured content and styling.</li>
+        <li>Deployed and hosted the static website using Amazon S3 with bucket configuration for public access.</li>
+        <li>Configured Amazon Route 53 for domain registration and DNS setup, enabling access via uchennaokoronkwo.com and www.uchennaokoronkwo.com</li>
+        <li>Used Amazon Certificate Manager to validate the domain and obtain an SSL/TLS certificate.</li>
+        <li>Implemented Amazon CloudFront for HTTPS support and content distribution, enhancing performance and security for user experience.</li>
+        <li>Updated Amazon Route 53 DNS records to point the domain to the CloudFront distribution, ensuring global accessibility.</li>
+      </ul>
+      <h3>Stem Craft 2.0 in C/C++</h3>
+      <ul>
+        <li>Worked in a team of 4 to build an LED electric circuit with switches, resistors, and a buzzer.</li>
+        <li>Developed a program to assess the functionality and capabilities of the circuit.</li>
+        <li>Participated in a timed, competition-style project emphasizing problem solving, planning, and teamwork.</li>
+        <li>Competition was hosted by NSBE and sponsored by Afrotech.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p class="visitor-count">Visitor Count: <span id="visitor-count">Loading...</span></p>
+    <p>&copy; 2025 UCHENNA OKORONKWO. All rights reserved.</p>
+  </footer>
+  
+  <script>
+    async function updateVisitorCount() {
+      try {
+        const response = await fetch('https://7u5wkrzmxe.execute-api.us-east-1.amazonaws.com/VisitorCounterFunction', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ message: 'visit' })
+        });
+  
+        const data = await response.json();
+        const count = data.count;
+  
+        document.getElementById('visitor-count').innerText = count;
+      } catch (err) {
+        console.error('Error fetching visitor count:', err);
+        document.getElementById('visitor-count').innerText = 'Error';
+      }
+    }
+  
+    updateVisitorCount();
+  </script>
+  
+</body>
+</html>
